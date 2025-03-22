@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lernsoftware</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Lernsoftware Plattform</h1>
+        </header>
+        <nav>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section class="documents">
+                <h2>Dokumente</h2>
+                <input type="file" id="fileUpload">
+                <button onclick="uploadFile()">Hochladen</button>
+                <ul id="fileList"></ul>
+            </section>
+            <section class="chat">
+                <h2>Chat</h2>
+                <div id="messages"></div>
+                <input type="text" id="chat-input" placeholder="Nachricht eingeben...">
+                <button onclick="sendMessage()">Senden</button>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
