@@ -1,12 +1,13 @@
 {
   "name": "lernsoftware",
   "version": "1.0.0",
-  "description": "Eine moderne Lernsoftware als Web-App",
+  "description": "Eine Lernplattform mit PDF-Uploads",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.1",
+    "multer": "^1.4.2"
   }
 }
