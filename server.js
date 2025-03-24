@@ -1,27 +1,51 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
-app.use(express.static('public')); // Damit deine statischen Dateien geladen werden
-
-let fileRatings = {}; // Bewertungen im Speicher (für Testzwecke)
-
-// Route für das Abrufen der Bewertungen
-app.get('/ratings', (req, res) => {
-  res.json(fileRatings);
+// Multer-Konfiguration für den Datei-Upload
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
 });
 
-// Route für das Hinzufügen einer Bewertung
-app.post('/rate', (req, res) => {
-  const { fileName, rating } = req.body;
-  if (!fileRatings[fileName]) {
-    fileRatings[fileName] = [];
-  }
-  fileRatings[fileName].push(rating);
-  res.send({ success: true });
+const upload = multer({ storage: storage });
+
+// PDF-Dateien speichern
+let files = [];
+
+// Stelle sicher, dass der Upload-Ordner existiert
+if (!fs.existsSync('uploads')) {
+    fs.mkdirSync('uploads');
+}
+
+// API zum Hochladen von PDFs
+app.post('/upload', upload.single('pdf'), (req, res) => {
+    const { schwerpunkt } = req.body;
+    const file = req.file;
+    if (!file) {
+        return res.status(400).json({ message: 'Kein PDF ausgewählt.' });
+    }
+    const newFile = { name: file.filename, schwerpunkt };
+    files.push(newFile);
+    res.json({ message: 'PDF erfolgreich hochgeladen.' });
 });
+
+// API zum Abrufen von PDFs
+app.get('/files', (req, res) => {
+    const schwerpunkt = req.query.schwerpunkt;
+    const filteredFiles = files.filter(file => file.schwerpunkt === schwerpunkt);
+    res.json(filteredFiles);
+});
+
+app.use(express.static('public'));
 
 app.listen(PORT, () => {
-  console.log(`Server läuft auf Port ${PORT}`);
+    console.log(`Server läuft auf http://localhost:${PORT}`);
 });
