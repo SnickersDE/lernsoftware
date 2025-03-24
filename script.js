@@ -64,6 +64,91 @@ function uploadFile() {
     .then(() => loadFiles(schwerpunkt));
   }
 }
+// Funktion, um die PDFs und deren Bewertungen zu laden
+function loadFiles(schwerpunkt) {
+    fetch(`/files?schwerpunkt=${schwerpunkt}`)
+        .then(response => response.json())
+        .then(files => {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';  // Clear the list before adding new files
+
+            files.forEach(file => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('file-item');
+                
+                // Datei-Name anzeigen
+                const fileName = document.createElement('span');
+                fileName.textContent = file.name;
+                listItem.appendChild(fileName);
+
+                // Bewertungen hinzufügen (Sterne)
+                const starContainer = document.createElement('div');
+                starContainer.classList.add('star-container');
+                
+                // Bestehende Bewertungen für die Datei abrufen (falls vorhanden)
+                const ratings = file.ratings || [];
+                for (let i = 1; i <= 5; i++) {
+                    const star = document.createElement('span');
+                    star.classList.add('star');
+                    star.dataset.rating = i;
+                    star.innerHTML = '&#9733;'; // Sternsymbol
+
+                    // Sterne je nach Bewertung auffüllen
+                    if (ratings.includes(i)) {
+                        star.classList.add('filled');
+                    }
+
+                    // Event-Listener zum Setzen einer neuen Bewertung
+                    star.onclick = () => rateFile(file, i);
+                    starContainer.appendChild(star);
+                }
+
+                // Die Sterne unter dem Dateinamen hinzufügen
+                listItem.appendChild(starContainer);
+
+                // Die Liste der Dateien (PDFs) mit Bewertungen anzeigen
+                fileList.appendChild(listItem);
+            });
+        });
+}
+
+// Bewertungs-Funktion (Sendet die Bewertung an den Server)
+function rateFile(file, rating) {
+    fetch('/rate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ fileName: file.name, rating })
+    })
+    .then(response => response.json())
+    .then(() => {
+        // Nach der Bewertung die Liste der Dateien neu laden
+        loadFiles(file.schwerpunkt);
+    });
+}
+
+// Funktion, um die Lernstoff-Schwerpunkte zu laden
+function loadSchwerpunkte() {
+    fetch('/schwerpunkte')
+        .then(response => response.json())
+        .then(schwerpunkte => {
+            const schwerpunkteList = document.getElementById('schwerpunkteList');
+            schwerpunkteList.innerHTML = '';
+
+            schwerpunkte.forEach(schwerpunkt => {
+                const button = document.createElement('button');
+                button.textContent = schwerpunkt.name;
+                button.onclick = () => loadFiles(schwerpunkt.name);
+                schwerpunkteList.appendChild(button);
+            });
+        });
+}
+
+// Event Listener für das Dropdown-Menü und die Lernstoff-Schwerpunkte
+document.addEventListener('DOMContentLoaded', () => {
+    loadSchwerpunkte(); // Lernstoff-Schwerpunkte laden, wenn die Seite geladen wird
+});
 
 function loadFiles(schwerpunkt) {
   fetch('/files?schwerpunkt=' + schwerpunkt)
