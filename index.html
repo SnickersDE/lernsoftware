@@ -1,40 +1,60 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lernsoftware</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lernsoftware Plattform</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>Lernsoftware Plattform</h1>
-        </header>
-        <nav>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-            </ul>
-        </nav>
-        <div class="content">
-            <section class="documents">
-                <h2>Dokumente</h2>
-                <input type="file" id="fileUpload">
-                <button onclick="uploadFile()">Hochladen</button>
-                <ul id="fileList"></ul>
-            </section>
-            <section class="chat">
-                <h2>Chat</h2>
-                <div id="messages"></div>
-                <input type="text" id="chat-input" placeholder="Nachricht eingeben...">
-                <button onclick="sendMessage()">Senden</button>
-            </section>
+  <div class="container">
+    <header class="header">
+      <h1>Lernsoftware Plattform</h1>
+      <div class="schwerpunkte-container">
+        <button id="schwerpunkte-btn">Lernstoff Schwerpunkte</button>
+        <div class="schwerpunkte-menu">
+          <span data-schwerpunkt="1">1</span>
+          <span data-schwerpunkt="2">2</span>
+          <span data-schwerpunkt="3">3</span>
+          <span data-schwerpunkt="4">4</span>
+          <span data-schwerpunkt="5">5</span>
         </div>
+      </div>
+    </header>
+    
+    <div class="content">
+      <section class="documents">
+        <h2>Dokumente</h2>
+        <div class="upload-container">
+          <input type="file" id="fileUpload" accept="application/pdf">
+          <select id="upload-schwerpunkt">
+            <option value="1">Schwerpunkt 1</option>
+            <option value="2">Schwerpunkt 2</option>
+            <option value="3">Schwerpunkt 3</option>
+            <option value="4">Schwerpunkt 4</option>
+            <option value="5">Schwerpunkt 5</option>
+          </select>
+          <button onclick="uploadFile()">Hochladen</button>
+        </div>
+        <ul id="fileList"></ul>
+      </section>
+      
+      <section class="chat">
+        <h2>Chat</h2>
+        <div id="messages"></div>
+        <input type="text" id="chat-input" placeholder="Nachricht eingeben...">
+        <button onclick="sendMessage()">Senden</button>
+      </section>
     </div>
-    <script src="script.js"></script>
+    
+    <div id="pdfModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <iframe id="pdfViewer" src="" width="100%" height="500px"></iframe>
+      </div>
+    </div>
+    
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
