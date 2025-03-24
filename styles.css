@@ -1,112 +1,237 @@
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;700&display=swap');
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Spartan', sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #FFFFFF;
-    color: #4A1C1C;
+  font-family: 'Spartan', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #FFFFFF;
+  color: #4A1C1C;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 .header {
-    background: #4A1C1C;
-    color: white;
-    padding: 15px;
-    text-align: center;
+  background: #4A1C1C;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  position: relative;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
+.schwerpunkte-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
-nav ul li {
-    margin: 0 10px;
-    cursor: pointer;
-    font-weight: 700;
+#schwerpunkte-btn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+#schwerpunkte-btn:hover {
+  background: #7A2E2E;
+}
+
+.schwerpunkte-menu {
+  display: none;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #4A1C1C;
+  border-radius: 5px;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.schwerpunkte-container:hover .schwerpunkte-menu {
+  display: block;
+}
+
+.schwerpunkte-menu span {
+  margin: 5px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #4A1C1C;
+  transition: all 0.2s ease;
+}
+
+.schwerpunkte-menu span:hover {
+  color: #7A2E2E;
 }
 
 .content {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  padding: 20px;
 }
 
 .documents {
-    flex: 3;
-    padding: 20px;
-    background: #F8F8F8;
-    border-right: 2px solid #4A1C1C;
+  flex: 3;
+  padding: 20px;
+  background: #F8F8F8;
+  border-right: 2px solid #4A1C1C;
 }
 
-.chat {
-    flex: 1;
-    padding: 20px;
-    background: #FFF5F5;
-    display: flex;
-    flex-direction: column;
-    min-width: 300px;
+.upload-container {
+  margin-bottom: 15px;
 }
 
-#messages {
-    flex: 1;
-    overflow-y: auto;
-    background: white;
-    padding: 10px;
-    border: 2px solid #4A1C1C;
-    border-radius: 5px;
-    height: 300px;
-}
-
-.message {
-    border-bottom: 1px solid #ddd;
-    padding: 5px 0;
-}
-
-.username {
-    font-weight: bold;
-    color: #4A1C1C;
-}
-
-input, button {
-    margin-top: 10px;
-    font-family: 'Spartan', sans-serif;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #4A1C1C;
+.upload-container input, .upload-container select, .upload-container button {
+  padding: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  width: 100%;
 }
 
 button {
-    background: #4A1C1C;
-    color: white;
-    cursor: pointer;
+  background: #4A1C1C;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 button:hover {
-    background: #7A2E2E;
+  background: #7A2E2E;
+}
+
+.documents ul {
+  list-style: none;
+  padding: 0;
+}
+
+.documents li {
+  padding: 8px;
+  margin-bottom: 5px;
+  background: #fff;
+  border: 1px solid #4A1C1C;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.documents li .download {
+  cursor: pointer;
+  color: #4A1C1C;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.documents li .download:hover {
+  color: #7A2E2E;
+}
+
+.chat {
+  flex: 1;
+  padding: 20px;
+  background: #FFF5F5;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  background: white;
+  padding: 10px;
+  border: 2px solid #4A1C1C;
+  border-radius: 5px;
+  height: 300px;
+  margin-bottom: 10px;
+}
+
+.message {
+  border-bottom: 1px solid #ddd;
+  padding: 5px 0;
+}
+
+.username {
+  font-weight: bold;
+  color: #4A1C1C;
+}
+
+input, button {
+  margin-top: 10px;
+  font-family: 'Spartan', sans-serif;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #4A1C1C;
+}
+
+button {
+  background: #4A1C1C;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #7A2E2E;
 }
 
 @media (max-width: 1024px) {
-    .content {
-        flex-direction: column;
-    }
-    .documents, .chat {
-        flex: 1;
-        border: none;
-    }
+  .content {
+    flex-direction: column;
+  }
+  .documents, .chat {
+    flex: 1;
+    border: none;
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  position: relative;
+  border-radius: 5px;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
 }
