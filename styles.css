@@ -14,6 +14,33 @@ body {
   background-color: #FFFFFF;
   color: #4A1C1C;
 }
+/* Stil für die Sternebewertung */
+.star-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+}
+
+.star {
+    font-size: 20px;
+    cursor: pointer;
+    color: #ccc; /* Grau für unbewertete Sterne */
+}
+
+.star.filled {
+    color: gold; /* Gold für bewertete Sterne */
+}
+
+/* Stil für die Datei-Liste */
+.file-item {
+    list-style-type: none;
+    margin: 10px 0;
+}
+
+.file-item span {
+    margin-right: 10px;
+}
 
 .container {
   display: flex;
