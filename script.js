@@ -1,4 +1,5 @@
 let username = '';
+let ratings = {}; // Objekt zur Speicherung der Bewertungen der PDFs
 
 function setUsername() {
   username = prompt("Wähle einen Nutzernamen:");
@@ -73,14 +74,38 @@ function loadFiles(schwerpunkt) {
       files.forEach(file => {
         const listItem = document.createElement('li');
         listItem.textContent = file.name;
+        
+        // Bewertungssterne hinzufügen
+        const starContainer = document.createElement('span');
+        starContainer.classList.add('stars');
+        for (let i = 1; i <= 5; i++) {
+          const star = document.createElement('span');
+          star.classList.add('star');
+          star.dataset.rating = i;
+          star.innerHTML = '&#9733;'; // Sternsymbol
+          star.onclick = () => rateFile(file, i);
+          if (ratings[file.name] && ratings[file.name] >= i) {
+            star.classList.add('filled');
+          }
+          starContainer.appendChild(star);
+        }
+
+        // Download-Button hinzufügen
         const downloadBtn = document.createElement('span');
         downloadBtn.classList.add('download');
         downloadBtn.textContent = '↓';
         downloadBtn.onclick = () => openPDF(file);
+        listItem.appendChild(starContainer);
         listItem.appendChild(downloadBtn);
         fileList.appendChild(listItem);
       });
     });
+}
+
+function rateFile(file, rating) {
+  // Speichern der Bewertung
+  ratings[file.name] = rating;
+  loadFiles(file.schwerpunkt); // Die Dateien erneut laden, um die Bewertung zu aktualisieren
 }
 
 function openPDF(file) {
