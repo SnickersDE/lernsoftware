@@ -235,3 +235,33 @@ button:hover {
 .close:hover {
   color: black;
 }
+
+.stars {
+  display: inline-block;
+  font-size: 20px;
+}
+
+.star {
+  cursor: pointer;
+  color: #ddd; /* Graue Sterne */
+  transition: color 0.3s;
+}
+
+.star.filled {
+  color: gold; /* Goldene Farbe für ausgefüllte Sterne */
+}
+
+.star:hover,
+.star:hover ~ .star {
+  color: gold;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.star.selected {
+  color: gold;
+  transition: color 0.3s;
+}
+
