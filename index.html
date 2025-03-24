@@ -7,6 +7,21 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="upload-container">
+    <h2>PDF Hochladen</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="pdfFile" name="pdf" accept="application/pdf" required />
+        <label for="schwerpunkt">Lernstoff-Schwerpunkt:</label>
+        <select id="schwerpunkt" name="schwerpunkt" required>
+            <option value="Mathematik">Mathematik</option>
+            <option value="Deutsch">Deutsch</option>
+            <option value="Englisch">Englisch</option>
+            <option value="Biologie">Biologie</option>
+        </select>
+        <button type="submit">Hochladen</button>
+    </form>
+</div>
+
   <div class="container">
     <header class="header">
       <h1>Lernsoftware Plattform</h1>
